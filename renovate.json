@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
+  "extends": ["config:recommended"],
+
+  "enabledManagers": ["helmv3"],
+
+  "includePaths": ["helm/**"],
+
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dashboard",
+
+  "packageRules": [
+    {
+      "matchManagers": ["helmv3"],
+      "matchFileNames": ["helm/**"],
+      "groupName": "gitops helm charts"
+    }
+  ]
+}

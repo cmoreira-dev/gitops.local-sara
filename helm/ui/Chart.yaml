@@ -1,0 +1,10 @@
+apiVersion: v2
+name: generic-app
+description: Wrapper chart to deploy sara-ui via the shared generic-app chart
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: generic-app
+    version: "0.2.0"
+    repository: "oci://ghcr.io/cmoreira-dev/charts"

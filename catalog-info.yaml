@@ -1,0 +1,21 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sara
+  description: 'Sara — ad-free chords/lyrics practice player for Cifra Club'
+  tags:
+    - kubernetes
+    - homelab
+    - infrastructure
+  annotations:
+    github.com/project-slug: cmoreira-dev/gitops.local-sara
+    backstage.io/kubernetes-id: homelab-bootstrap-k3s
+    argocd/app-name: 'sara'
+  links:
+    - url: 'https://local.cmoreira.dev/sara'
+      title: 'Sara'
+      icon: dashboard
+spec:
+  type: website
+  lifecycle: lab

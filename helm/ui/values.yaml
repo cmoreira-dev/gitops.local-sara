@@ -1,0 +1,39 @@
+generic-app:
+  nameOverride: "sara-ui"
+
+  namespace:
+    create: true
+    name: "sara"
+
+  image:
+    repository: "344965637185.dkr.ecr.us-east-1.amazonaws.com/sara/ui"
+    tag: "latest"
+
+  service:
+    port: 80
+    targetPort: 80 # porta real que o container escuta
+
+  httpRoute:
+    enabled: true
+    gateway:
+      name: nginx-gateway-cmoreira-dev
+      namespace: nginx-gateway
+    hostnames:
+      - "local.cmoreira.dev"
+    # SEM URLRewrite aqui — ao contrário da API, o Next.js precisa receber o path com
+    # /sara intacto: `basePath: "/sara"` (ui.ia.local-sara/next.config.js, baked no
+    # build) faz o app assumir que está montado nesse prefixo e prefixar sozinho todos
+    # os links/assets/RSC fetches. Um URLRewrite que removesse o /sara quebraria essa
+    # premissa. /sara/api (API) ganha por longest-prefix-match sobre este catch-all.
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /sara
+
+  # Sem configMap: NEXT_PUBLIC_API_URL e NEXT_BASE_PATH já vêm com o valor de produção
+  # certo como default do ARG no Dockerfile (ver ui.ia.local-sara/CLAUDE.md) — são
+  # build-time, não dá pra injetar via env em runtime mesmo, então não há nada pra este
+  # configMap fazer.
+
+  # Sem segredos — mesma razão do helm/api/values.yaml.
