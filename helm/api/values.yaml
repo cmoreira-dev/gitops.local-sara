@@ -1,48 +1,43 @@
 generic-app:
   nameOverride: "sara-api"
-
   namespace:
     create: true
     name: "sara"
-
   image:
     repository: "344965637185.dkr.ecr.us-east-1.amazonaws.com/sara/api"
-    tag: "latest"
-
+    tag: "a85325d"
   service:
     port: 80
     targetPort: 8080 # porta real que o container escuta
-
   httpRoute:
     enabled: true
     gateway:
       name: nginx-gateway-cmoreira-dev
       namespace: nginx-gateway
     hostnames:
-      - "local.cmoreira.dev"
+    - "local.cmoreira.dev"
     # /sara/api tem de ganhar do /sara (catch-all da UI) no mesmo hostname — Gateway API
     # resolve isso por longest-prefix-match, não precisa de nenhuma config extra aqui.
     # Ao contrário da UI, a API não sabe que está montada num sub-path (sem basePath/
     # root_path no FastAPI) — por isso o URLRewrite abaixo remove o /sara/api antes do
     # tráfego chegar no container; as rotas continuam /health, /search, etc.
     rules:
-      - matches:
-          - path:
-              type: PathPrefix
-              value: /sara/api
-        filters:
-          - type: URLRewrite
-            urlRewrite:
-              path:
-                type: ReplacePrefixMatch
-                replacePrefixMatch: /
-
+    - matches:
+      - path:
+          type: PathPrefix
+          value: /sara/api
+      filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /
   configMap:
     enabled: true
     injectAsEnv: true
     data:
       ALLOWED_ORIGINS: "https://local.cmoreira.dev"
 
-  # Sem segredos — api.ia.local-sara é um scraper público do Cifra Club, não chama
-  # nenhuma API paga/autenticada. Por isso, ao contrário do teupadel-api, não há bloco
-  # externalSecrets aqui.
+# Sem segredos — api.ia.local-sara é um scraper público do Cifra Club, não chama
+# nenhuma API paga/autenticada. Por isso, ao contrário do teupadel-api, não há bloco
+# externalSecrets aqui.
