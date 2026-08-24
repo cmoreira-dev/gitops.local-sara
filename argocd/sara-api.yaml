@@ -3,6 +3,16 @@ kind: Application
 metadata:
   name: sara-api
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: sara-api=344965637185.dkr.ecr.us-east-1.amazonaws.com/sara/api
+    argocd-image-updater.argoproj.io/sara-api.update-strategy: newest-build
+    # Só considera as tags de 7 chars do git sha (o build-push-ecr.yml também
+    # publica "latest" e, em git tag, "vX.Y.Z" — não queremos que o updater
+    # oscile entre elas).
+    argocd-image-updater.argoproj.io/sara-api.allow-tags: regexp:^[0-9a-f]{7}$
+    argocd-image-updater.argoproj.io/sara-api.helm.image-tag: generic-app.image.tag
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/argocd-image-updater-git-creds
+    argocd-image-updater.argoproj.io/write-back-target: helmvalues:helm/api/values.yaml
 spec:
   project: homelab
   source:

@@ -3,6 +3,13 @@ kind: Application
 metadata:
   name: sara-ui
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: sara-ui=344965637185.dkr.ecr.us-east-1.amazonaws.com/sara/ui
+    argocd-image-updater.argoproj.io/sara-ui.update-strategy: newest-build
+    argocd-image-updater.argoproj.io/sara-ui.allow-tags: regexp:^[0-9a-f]{7}$
+    argocd-image-updater.argoproj.io/sara-ui.helm.image-tag: generic-app.image.tag
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/argocd-image-updater-git-creds
+    argocd-image-updater.argoproj.io/write-back-target: helmvalues:helm/ui/values.yaml
 spec:
   project: homelab
   source:
