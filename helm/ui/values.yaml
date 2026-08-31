@@ -8,7 +8,7 @@ generic-app:
     tag: "043075d"
   service:
     port: 80
-    targetPort: 80 # porta real que o container escuta
+    targetPort: 3000 # porta real que o container escuta (non-root, generic-app 0.7.0)
   httpRoute:
     enabled: true
     gateway:
