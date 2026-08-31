@@ -5,7 +5,7 @@ generic-app:
     name: "sara"
   image:
     repository: "344965637185.dkr.ecr.us-east-1.amazonaws.com/sara/api"
-    tag: "858f095"
+    tag: "9d1e876"
   service:
     port: 80
     targetPort: 8080 # porta real que o container escuta
