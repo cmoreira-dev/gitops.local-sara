@@ -5,7 +5,7 @@ generic-app:
     name: "sara"
   image:
     repository: "344965637185.dkr.ecr.us-east-1.amazonaws.com/sara/ui"
-    tag: "043075d"
+    tag: "cfdf857"
   service:
     port: 80
     targetPort: 3000 # porta real que o container escuta (non-root, generic-app 0.7.0)
