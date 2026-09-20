@@ -1,0 +1,8 @@
+site_name: 'gitops.local-sara'
+site_description: 'GitOps deployment (ArgoCD + Helm) for the Sara product'
+
+nav:
+  - Home: index.md
+
+plugins:
+  - techdocs-core
