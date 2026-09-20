@@ -12,6 +12,7 @@ metadata:
     github.com/project-slug: cmoreira-dev/gitops.local-sara
     backstage.io/kubernetes-id: homelab-bootstrap-k3s
     argocd/app-name: 'sara'
+    backstage.io/techdocs-ref: dir:.
   links:
     - url: 'https://local.cmoreira.dev/sara'
       title: 'Sara'
